@@ -1,5 +1,4 @@
 import React from "react";
-import Movies from "./movies";
 
 const MovieForm = ({ match, history }) => {
   return (

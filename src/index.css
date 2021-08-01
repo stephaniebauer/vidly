@@ -20,6 +20,11 @@ body {
   width: 100%;
 }
 
+.new-movie-btn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

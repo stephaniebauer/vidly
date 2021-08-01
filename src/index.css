@@ -16,6 +16,10 @@ body {
   cursor: pointer;
 }
 
+.label-genre {
+  width: 100%;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

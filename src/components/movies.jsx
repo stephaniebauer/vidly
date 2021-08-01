@@ -91,6 +91,9 @@ class Movies extends Component {
             />
           </div>
           <div className="col">
+            <a className="btn btn-primary" href="/movies/new" role="button">
+              New Movie
+            </a>
             <p>Showing {totalCount} movies in the database</p>
             <MoviesTable
               movies={movies}

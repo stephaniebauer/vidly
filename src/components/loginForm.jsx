@@ -1,6 +1,8 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import auth from "../services/authService";
 
 class LoginForm extends Form {
   state = {
@@ -13,12 +15,28 @@ class LoginForm extends Form {
     password: Joi.string().required().label("Password"),
   };
 
-  doSubmit = () => {
-    //Call server
-    console.log("Submitted");
+  doSubmit = async () => {
+    try {
+      const { data } = this.state;
+      // returns a JSON web token - see authService.js
+      await auth.login(data.username, data.password);
+      //here full reload, otherwise App.js componentDidMount won't get triggered
+      //this.props.history.push("/");
+      const { state } = this.props.location;
+      window.location = state ? state.from.pathname : "/";
+      //window.location = "/";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        console.log("ex", ex.response);
+        const errors = { ...this.state.errors };
+        errors.username = ex.response.data;
+        this.setState({ errors });
+      }
+    }
   };
 
   render() {
+    if (auth.getCurrentUser()) return <Redirect to="/" />;
     return (
       <div className="container">
         <h1>Login</h1>
